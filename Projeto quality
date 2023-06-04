@@ -1,0 +1,21 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by  import By
+from selenium.webdriver.chrome.options import Options 
+import pyperclip
+import time
+import pyautogui
+
+options = Options()
+options.add_experimental_option("detach", True)
+
+nav = webdriver.Chrome(options=options)
+nav.get("https://sistema.qualityentregas.com.br/sistema/")
+elem = nav.find_element(By.NAME, "FsLogin").send_keys("estefano.davel")
+elem = nav.find_element(By.NAME, "FsSenha").send_keys("flamengo123")
+elem = nav.find_element(By.NAME, "FbEnviar").click()
+elem = nav.find_element(By.NAME, "FsPesquisa").send_keys("935500")
+elem = nav.find_element(By.NAME, "FsPesquisa").send_keys(Keys.ENTER)
+posicao = nav.location
+largura = nav.size['width']
+altura = nav.size['height']
