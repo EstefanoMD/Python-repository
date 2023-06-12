@@ -61,9 +61,12 @@ for nf , dt, ro, rd, cpf in zip(nota_fiscal, data , rota_origem, rota_destino,cp
     elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.DEh1R.KKjvXb').send_keys(rd)
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.DEh1R.KKjvXb').send_keys(Keys.ENTER)
     
-    #
+    #Para reembalagem tipo sacararia 
     elemento = nav.find_element(By.CSS_SELECTOR, '#i28 > div.vd3tt > div').click()
     
+    #para reembalagem tipo papel kraft
+    #elemento = nav.find_element(By.CSS_SELECTOR, '#i31 > div.vd3tt > div').click()
+
     elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(cpf)
     
     time.sleep(5)
