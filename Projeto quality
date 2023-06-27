@@ -6,7 +6,7 @@ import openpyxl
 import time
 
 # Carregue a planilha
-arquivo_planilha = openpyxl.load_workbook(r'C:\Users\Estefano Davel\Documents\Python\Projeto_quality_automatizacao\Planilha teste.xlsx')
+arquivo_planilha = openpyxl.load_workbook(r'C:\Users\estef\Documents\Python\Projeto_quality_automatizacao\Planilha teste.xlsx')
 
 # Selecione a planilha
 planilha = arquivo_planilha['Planilha']
@@ -69,11 +69,14 @@ for nf , d, ro, rd, cpf, hr , mt in zip(nota_fiscal, data , rota_origem, rota_de
     # elemento = nav.find_element(By.CSS_SELECTOR, '#i5 > div.uHMk6b.fsHoPb').click()
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(2) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys("Estéfano")
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(3) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(cpf)
-    elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R').click() 
-    elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div.OA0qNb.ncFHed.QXL7Te > div:nth-child(12) > span').send_keys(Keys.ENTER)   
-    
-    # #Preencha cada campo do formulário com os dados da planilha
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R').click() 
+    # time.sleep(2)
+    # elemento = nav.find_element(By.CSS_SELECTOR,'#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div.OA0qNb.ncFHed.QXL7Te > div:nth-child(12) > span').click() 
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(6) > div > div > div:nth-child(2) > div > div > div.rFrNMe.yqQS1.hatWr.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(d)
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(1) > div.rFrNMe.genAeb.yqQS1.toT2u.cRGsOb.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(hr)         
     # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(3) > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(mt)         
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(8) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(nf)
+    elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(9) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
+    elemento.send_keys('sonepar')
+    elemento.send_keys(Keys.ENTER)
 
