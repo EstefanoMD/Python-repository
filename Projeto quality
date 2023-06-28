@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options 
+from selenium.webdriver.chrome.service import Service
 import openpyxl
 import time
 
@@ -35,10 +36,10 @@ for valor in planilha.iter_rows(min_row=3, min_col=8, values_only=True):
     rota_destino.append(valor[0])
 
 
-cpf = []
+cpfs = []
 for valor in planilha.iter_rows(min_row=3, min_col=17, values_only=True):
     string = str(valor[0])
-    cpf.append(string)
+    cpfs.append(string)
 
 hora = []
 minuto = []
@@ -50,11 +51,13 @@ for valor in planilha.iter_rows(min_row=3, min_col=6, values_only=True):
     string = str(valor[0])
     minutos = string[3:5]
     minuto.append(minutos)
+print(rota_destino)
 
-
+service = Service(r'C:\Users\estef\Documents\WebDrivers\chromedriver_win32\chromedriver')
 options = Options()
 options.add_experimental_option("detach", True)
-nav = webdriver.Chrome(r'C:\Users\estef\Documents\WebDrivers\chromedriver_win32\chromedriver', options=options)     
+nav = webdriver.Chrome(service=service, options=options)     
+
 nav.get('https://docs.google.com/forms/d/e/1FAIpQLSdL49H6PyVtxL4DyoZcHiAe6g82Ggp30dqgubHCubTZTGGRVQ/viewform')
 nav.find_element(By.CSS_SELECTOR,'#identifierId').send_keys('estefano.davel@qualityentregas.com.br')
 nav.find_element(By.CSS_SELECTOR,'#identifierNext > div > button > span').click()
@@ -64,19 +67,73 @@ nav.find_element(By.CSS_SELECTOR,'#passwordNext > div > button > span').click()
 time.sleep(5)
 
 
-for nf , d, ro, rd, cpf, hr , mt in zip(nota_fiscal, data , rota_origem, rota_destino,cpf, hora , minuto):
+for nf , d, ro, rd, cpf, hr , mt in zip(nota_fiscal, data , rota_origem, rota_destino, cpfs, hora , minuto):
+
+    # #Enviar por e-mail    
+    # time.sleep(3)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#i5 > div.uHMk6b.fsHoPb')
+    # elemento.click()
     
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#i5 > div.uHMk6b.fsHoPb').click()
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(2) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys("Estéfano")
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(3) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(cpf)
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R').click() 
+    # #Operador de reembalagem
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(2) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys("Estéfano")
+
+    # #CPF
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(3) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys(cpf)
+
+    # #Hub responsável pela reembalagem
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
+    # elemento.click() 
     # time.sleep(2)
-    # elemento = nav.find_element(By.CSS_SELECTOR,'#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div.OA0qNb.ncFHed.QXL7Te > div:nth-child(12) > span').click() 
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(6) > div > div > div:nth-child(2) > div > div > div.rFrNMe.yqQS1.hatWr.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(d)
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(1) > div.rFrNMe.genAeb.yqQS1.toT2u.cRGsOb.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(hr)         
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(3) > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(mt)         
-    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(8) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys(nf)
-    elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(9) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
-    elemento.send_keys('sonepar')
-    elemento.send_keys(Keys.ENTER)
+    # elemento = nav.find_element(By.CSS_SELECTOR,'#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(5) > div > div > div.vQES8d > div > div.OA0qNb.ncFHed.QXL7Te > div:nth-child(12) > span')
+    # elemento.click() 
+    
+    # #Data reembalagem(data)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(6) > div > div > div:nth-child(2) > div > div > div.rFrNMe.yqQS1.hatWr.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys(d)
+    
+    # #Hora início da reembalagem(horas)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(1) > div.rFrNMe.genAeb.yqQS1.toT2u.cRGsOb.zKHdkd > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys(hr)         
+    
+    # #Hora início da reembalagem(minutos)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(7) > div > div > div.PfQ8Lb > div > div:nth-child(3) > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys(mt)         
+    
+    # #Nota fiscal
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(8) > div > div > div.AgroKb > div > div.aCsJod.oJeWuf > div > div.Xb9hP > input')
+    # elemento.send_keys(nf)
+    
+    # #Embarcador(grupo)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(9) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
+    # elemento.send_keys('sonepar')
+    # elemento.send_keys(Keys.ENTER)
+
+    #CDD origem
+    # time.sleep(1)
+    # elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(11) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
+    # elemento.click()
+    # elemento.send_keys(ro)
+    # elemento.send_keys(Keys.ENTER)
+    
+    #CDD destino
+    time.sleep(1)
+    elemento = nav.find_element(By.CSS_SELECTOR, '#mG61Hd > div.RH5hzf.RLS9Fe > div > div.o3Dpx > div:nth-child(11) > div > div > div.vQES8d > div > div:nth-child(1) > div.ry3kXd > div.MocG8c.HZ3kWc.mhLiyf.LMgvRb.KKjvXb.DEh1R')
+    elemento.click()
+    time.sleep(2)
+    
+    '''Não estou conseguindo preencher o CDD destino , uma ideia que pode funcionar seria dar um tab para ajudar na localização do destino correto'''
+    if rd == 'CCM':
+        elemento.send_keys('c')
+        time.sleep(2)
+        elemento.send_keys(Keys.ARROW_DOWN)
+        time.sleep(1)
+        elemento.send_keys(Keys.ARROW_DOWN)
+        time.sleep(1)
+        elemento.send_keys(Keys.ENTER)
+    else: 
+        elemento.send_keys(rd)
+        time.sleep(1)
+        elemento.send_keys(Keys.ENTER)
 
