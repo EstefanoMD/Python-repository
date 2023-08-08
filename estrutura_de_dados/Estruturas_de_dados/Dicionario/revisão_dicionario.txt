@@ -1,0 +1,65 @@
+Criando um dicionário:
+A sintaxe para criar um dicionário em Python é colocar os pares chave-valor dentro de chaves {}.
+
+meu_dicionario = {"chave1": valor1, "chave2": valor2, "chave3": valor3}
+
+Exemplo:
+pessoas = {
+    "João": 25,
+    "Maria": 30,
+    "Pedro": 27
+}
+
+Acessando valores em um dicionário:
+Você pode acessar os valores em um dicionário usando as chaves como índices:
+
+idade_joao = pessoas["João"]
+print(idade_joao)  # Saída: 25
+
+
+
+
+Adicionando e alterando valores:
+Para adicionar um novo par chave-valor ou alterar um valor existente, basta atribuir o valor à chave desejada:
+
+pessoas["Ana"] = 22
+pessoas["João"] = 26
+
+print(pessoas)  # Saída: {'João': 26, 'Maria': 30, 'Pedro': 27, 'Ana': 22}
+
+
+
+
+Removendo pares chave-valor:
+Você pode remover um par chave-valor usando a palavra-chave del
+
+del pessoas["Pedro"]
+print(pessoas)  # Saída: {'João': 26, 'Maria': 30, 'Ana': 22}
+
+
+
+
+
+Verificando a existência de chaves:
+Para verificar se uma chave existe em um dicionário, você pode usar o operador in:
+
+if "João" in pessoas:
+    print("João está no dicionário.")
+else:
+    print("João não está no dicionário.")
+
+
+
+Métodos úteis de dicionários:
+.keys() e .values()
+keys(): Retorna uma lista contendo todas as chaves do dicionário.
+
+values(): Retorna uma lista contendo todos os valores do dicionário
+
+chaves = pessoas.keys()
+valores = pessoas.values()
+
+print(chaves)   # Saída: dict_keys(['João', 'Maria', 'Ana'])
+print(valores)  # Saída: dict_values([26, 30, 22])
+
+
